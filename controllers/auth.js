@@ -34,6 +34,22 @@ router.post('/sign-up', async (req, res) => {
     // Must hash the password before sending to the database
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hashedPassword;
+
+    // All ready to create the new user!
+    const userCreated = await User.create(req.body);
+    
+    // initializing the session when we sign up
+    req.session.user = {
+      username: userCreated.username,
+      _id: userCreated._id
+    }
+
+    // req.session.user = {
+    //   username: userInDatabase.username,
+    //   _id: userInDatabase._id
+    // };
+
+
   
     // All ready to create the new user!
     await User.create(req.body);

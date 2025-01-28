@@ -7,7 +7,15 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 
+// import controllers  (our endpoints)===============================
 const authController = require('./controllers/auth.js');
+const lailCtrl = require("./controllers/lails.js");// added tuesday
+
+// added tuesday
+// import middleware functions =====================================
+// we use these below
+const isSignedIn = require("./middleware/is-signed-in.js");
+const passUserToView = require("./middleware/pass-user-to-view.js");
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -22,8 +30,15 @@ mongoose.connection.on('connected', () => {
 // 
 app.use(express.static('public'));
 
+// MIDDLEWARE ================================
+// parses the form submissions to create req.body
 app.use(express.urlencoded({ extended: false }));
+
 app.use(methodOverride('_method'));
+
+// log out http requests into the server
+app.use(morgan("dev"));
+// creates/process our session cookies
 // app.use(morgan('dev'));
 app.use(
   session({
@@ -32,6 +47,35 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// USING THE CUSTOM MIDDLEWARE FUNCTION
+// this must exist before our endpoints (because it is attaching) the user
+// variable to the response (ejs page)
+app.use(passUserToView);
+// =============================================
+// ENDPOINTS ===================================
+// Landing Page
+app.get("/", (req, res) => {
+  console.log(req.session, " <- req.session");
+
+  // if we are logged in lets redirect the user to their applications index page
+  if (req.session.user) {
+    res.redirect(`/users/${req.session.user._id}/applications`);
+  } else {
+    // otherwise show the landing page
+    res.render("index.ejs");
+  }
+
+});
+
+// mounting the controllers at an address on the server
+app.use("/auth", authController);
+
+
+// Check for log before our application endpoints
+app.use(isSignedIn)
+app.use("/users/:userId/applications", applicationCtrl);
+
 
 app.get('/', (req, res) => {
   res.render('index.ejs', {
@@ -47,7 +91,6 @@ app.get('/vip-lounge', (req, res) => {
   }
 });
 
-app.use('/auth', authController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
