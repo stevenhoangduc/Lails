@@ -17,9 +17,23 @@
       type="password"
       name="confirmPassword"
       id="confirmPassword"
-      required 
-    />
+      required/>
+      <input type="checkbox" onclick="myFunction()">Show Password 
     <button type="submit">Sign up</button>
+   
   </form>
 </body>
+<script>
+   function myFunction() {
+  var x = document.getElementById("password"); // this show the password input
+  let y = document.getElementById("confirmPassword"); // this shows the confirm password input
+  if (x.type === "password") {
+    x.type = "text";
+    y.type = "text";
+  } else {
+    x.type = "password";
+    y.type = "password";
+  }
+}
+</script>
 </html>

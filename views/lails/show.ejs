@@ -1,0 +1,37 @@
+<!-- friday 1/24 FIRST-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<%- include('../partials/_navbar') %>
+	<h1><%= application.title %> at <%= application.company %></h1>
+	<% if (application.notes) { %>
+		<p>Notes: <%= application.notes %></p> 
+	<% } %>
+	<% if (application.postingLink) { %>
+		<a href="<%= application.postingLink %>">View Job Posting</a> 
+	<% } %>
+	<p>Current Status: <%= application.status %></p>
+
+    <!-- friday 1/24 THIRD -->
+    <a href="/users/<%= user._id  %>/applications/<%= applications._id %>/edit">Edit</a>
+    <!-- FRIDAY 1/24 THIRD -->
+    
+    <!-- friday 1/24 FIRST -->
+
+    <!-- friday 1/24 SECOND-->
+    <form
+    action="/users/<%= user._id %>/applications/<%= application._id %>?_method=DELETE"
+    method="POST"
+  >
+    <button type="submit">Delete this application</button>
+  </form> 
+  <!-- friday 1/24 SECOND -->
+
+</body>
+</html>
