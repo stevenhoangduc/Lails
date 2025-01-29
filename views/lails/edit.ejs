@@ -1,71 +1,67 @@
+<!-- update all application to lail  -->
 <!-- friday 1/24 FIRST -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editing <%= application.title %></title>
+  <title>Editing <%= lail.title %></title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Edit <%= application.title %> at <%= application.company %></h1>
+  <h1>Edit <%= lail.title %> at <%= lail.company %></h1>
   <form
-    action="/users/<%= user._id %>/applications/<%= application._id %>?_method=PUT"
+    action="/users/<%= user._id %>/lails/<%= lail._id %>?_method=PUT"
     method="POST"
   >
-    <label for="company">Company:</label>
+    <label for="company">Image:</label>
     <input
       type="text"
       name="company"
       id="company"
-      value="<%= application.company %>"
+      value="<%= lail.company %>"
     >
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" value="<%= application.title %>">
-    <label for="notes">Notes:</label>
-    <textarea name="notes" id="notes"><%= application.notes %></textarea>
-    <label for="postingLink">Posting Link:</label>
-    <input
-      type="text"
-      name="postingLink"
-      id="postingLink"
-      value="<%= application.postingLink %>"
-    >
-    <label for="status">Status:</label>
-    <select id="status" name="status">
+    <label for="add music">Add music:</label>
+    <input type="text" name="add music" id="add music" value="<%= lail.title %>">
+    <label for="comments">Comments:</label>
+    <textarea name="notes" id="comments"><%= lail.notes %></textarea>
+    <label for="likes">Likes:</label>
+    <input type="text" name="likes" id="likes" value="<%= lail.postingLink %>">
+    <label for="posts">Posts:</label>
+    <select id="posts" name="posts">
       <option
         value="interested"
-        <%= application.status === "interested" ? "selected" : "" %>
+        <%= lail.status === "interested" ? "selected" : "" %>
       >
-        Interested
+        Immediate 
       </option>
       <option
-        value="applied"
-        <%= application.status === "applied" ? "selected" : "" %>
+        value="Immediate"
+        <%= lail.status === "Immediate" ? "selected" : "" %>
       >
-        Applied
+        In 15 minutes
       </option>
       <option
-        value="interviewing"
-        <%= application.status === "interviewing" ? "selected" : "" %>
+        value="In 15 minutes"
+        <%= lail.status === "In 15 minutes" ? "selected" : "" %>
       >
-        Interviewing
+        In 45 minutes
       </option>
       <option
-        value="rejected"
-        <%= application.status === "rejected" ? "selected" : "" %>
+        value="In 45 minutes"
+        <%= lail.status === "in 45 minutes" ? "selected" : "" %>
       >
-        Rejected
+        Abord
       </option>
       <option
-        value="accepted"
-        <%= application.status === "accepted" ? "selected" : "" %>
+        value="abord"
+        <%= lail.status === "abord" ? "selected" : "" %>
       >
-        Accepted
+       Hold
       </option>
     </select>
-    <button type="submit">Update Application</button>
+    <button type="submit">Update Lails</button>
   </form>
 </body>
 </html>

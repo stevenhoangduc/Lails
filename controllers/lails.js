@@ -1,14 +1,18 @@
+// <!-- updated all application to lail 1/28 -->
+
 const express = require("express");
 const router = express.Router();
 
 const UserModel = require("../models/user");
 const User = require("../models/user");
 
+
+
 router.get("/", async function (req, res) {
   console.log(req.session, " req.session in index of lails");
   try {
     const currentUser = await UserModel.findById(req.session.user._id);
-
+console.log(currentUser)
     res.render("lails/index.ejs", {
       lails: currentUser.lails,
     });

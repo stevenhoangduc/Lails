@@ -7,6 +7,12 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 
+
+
+
+
+
+
 // import controllers  (our endpoints)===============================
 const authController = require('./controllers/auth.js');
 const lailCtrl = require("./controllers/lails.js");// added tuesday
@@ -58,9 +64,9 @@ app.use(passUserToView);
 app.get("/", (req, res) => {
   console.log(req.session, " <- req.session");
 
-  // if we are logged in lets redirect the user to their applications index page
+  // if we are logged in lets redirect the user to their lails index page
   if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/applications`);
+    res.redirect(`/users/${req.session.user._id}/lails`);
   } else {
     // otherwise show the landing page
     res.render("index.ejs");
@@ -72,9 +78,9 @@ app.get("/", (req, res) => {
 app.use("/auth", authController);
 
 
-// Check for log before our application endpoints
+// Check for log before our lail endpoints
 app.use(isSignedIn)
-app.use("/users/:userId/applications", applicationCtrl);
+app.use("/users/:userId/lails", lailCtrl);
 
 
 app.get('/', (req, res) => {

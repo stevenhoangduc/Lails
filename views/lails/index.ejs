@@ -4,23 +4,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Applications</title>
+	<title>Lails</title>
 	<link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
 	<%- include('../partials/_navbar.ejs') %>
-		<h1>Applications</h1>
-		<a href="/users/<%= user._id %>/applications/new">Add an App</a>
+		<h1>Lails</h1>
+		<a href="/users/<%= user._id %>/lails/new">Create a new Post </a>
 		<ul>
-			<% applications.forEach(application=> { %>
-				<li>
-					<a href="/users/<%= user._id %>/applications/<%= application._id %>">
-						<%= application.title %> at <%= application.company %>
-					</a>
-				</li>
-			<% }) %>
-		</ul>
+			<% lails.forEach(lail => { %>
+			  <li>
+				<a href="/users/<%= user._id %>/lails/<%= lail._id %>">
+				  <%= lail.image %> at <%= lail.addmusic %>
+				</a>
+			  </li>
+			<% }); %>
+		  </ul>
+		  
 </body>
 
 </html>

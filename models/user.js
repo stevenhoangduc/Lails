@@ -1,21 +1,22 @@
+// <!-- updated all application to lail 1/28 -->
+
 const mongoose = require('mongoose');
 
-const applicationSchema = mongoose.Schema({
-  company: {
+const lailsSchema = mongoose.Schema({
+  image: {
     type: String, 
     required: true
   },
-  title: {
+  addmusic: {
     type: String,
     required: true
   }, 
-  notes: String,
-  postingLink: String,
-  status: {
-    type: String,
-    // enums are the options that you have as the value of status
-    enum: ['interested', 'interviewing', 'rejected', 'accepted', 'applied']
-  }
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Comment"
+  }],
+  likes: Number,
+ 
 })
 
 const userSchema = mongoose.Schema({
@@ -29,6 +30,7 @@ const userSchema = mongoose.Schema({
   },
   // 1 to many relationship using embedding
   // 1 user has many applications, application belongs to a user
+  lails: [lailsSchema]
 });
 
 const User = mongoose.model('User', userSchema);
