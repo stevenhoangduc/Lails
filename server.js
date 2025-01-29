@@ -16,6 +16,7 @@ const session = require('express-session');
 // import controllers  (our endpoints)===============================
 const authController = require('./controllers/auth.js');
 const lailCtrl = require("./controllers/lails.js");// added tuesday
+const commentCtrl = require("./controllers/comments.js");// added tuesday
 
 // added tuesday
 // import middleware functions =====================================
@@ -81,6 +82,7 @@ app.use("/auth", authController);
 // Check for log before our lail endpoints
 app.use(isSignedIn)
 app.use("/users/:userId/lails", lailCtrl);
+app.use("/", commentCtrl);
 
 
 app.get('/', (req, res) => {

@@ -23,9 +23,18 @@
 >
   <button type="submit">like this post</button>
 </form>
+<form action="/users/<%= user._id %>/lails/<%= lail._id %>/comments" method="POST">
+
+  comment: <input type="text" name="text"/>
+  <button type="submit">add comment</button>
+</form>
 
 	<% if (lail.comments.length) { %>
     <!-- for each loops on lails.comments -->
+    <% lail.comments.forEach(comment => { %>
+      <p><%= comment.text %></p>
+     
+    <% }) %>
     <% } else {%>
       no comments yet
 	<% } %>
