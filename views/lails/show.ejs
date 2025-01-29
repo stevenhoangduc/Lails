@@ -33,6 +33,12 @@
     <!-- for each loops on lails.comments -->
     <% lail.comments.forEach(comment => { %>
       <p><%= comment.text %></p>
+      <form
+      action="/users/<%= user._id %>/lails/<%= lail._id %>/comments/<%= comment._id %>?_method=DELETE"
+      method="POST"
+    >
+      <button type="submit">Delete comment</button>
+    </form> 
      
     <% }) %>
     <% } else {%>
