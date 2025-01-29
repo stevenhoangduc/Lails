@@ -134,5 +134,31 @@ router.post("/", async function (req, res) {
   }
 });
 
+router.put('/:lailId/likes', async function(req, res){
+	try {
+		
+		const currentUser = await UserModel.findById(req.session.user._id)
+		
+		const lail = currentUser.lails.id(req.params.lailId)
+		
+
+		if (lail.likes){
+			lail.likes ++
+		} else {
+			lail.likes = 1
+		}
+
+		await currentUser.save()
+
+		// redirect back to the show page
+		res.redirect(`/users/${currentUser._id}/lails/${lail._id}`)
+
+
+	} catch(err){
+		console.log(err)
+		res.send("error updating lail, check terminal")
+	}
+})
+
 // we need to mount the router in our server.js in order to use it!
 module.exports = router;

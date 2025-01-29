@@ -17,6 +17,13 @@
 	<% } else {%>
       <p>Likes: 0</p>
   <%} %>
+  <form
+  action="/users/<%= user._id %>/lails/<%= lail._id %>/likes?_method=PUT"
+  method="POST"
+>
+  <button type="submit">like this post</button>
+</form>
+
 	<% if (lail.comments.length) { %>
     <!-- for each loops on lails.comments -->
     <% } else {%>

@@ -15,53 +15,13 @@
     action="/users/<%= user._id %>/lails/<%= lail._id %>?_method=PUT"
     method="POST"
   >
-    <label for="company">Image:</label>
-    <input
-      type="text"
-      name="company"
-      id="company"
-      value="<%= lail.company %>"
-    >
-    <label for="add music">Add music:</label>
-    <input type="text" name="add music" id="add music" value="<%= lail.title %>">
-    <label for="comments">Comments:</label>
-    <textarea name="notes" id="comments"><%= lail.notes %></textarea>
-    <label for="likes">Likes:</label>
-    <input type="text" name="likes" id="likes" value="<%= lail.postingLink %>">
-    <label for="posts">Posts:</label>
-    <select id="posts" name="posts">
-      <option
-        value="interested"
-        <%= lail.status === "interested" ? "selected" : "" %>
-      >
-        Immediate 
-      </option>
-      <option
-        value="Immediate"
-        <%= lail.status === "Immediate" ? "selected" : "" %>
-      >
-        In 15 minutes
-      </option>
-      <option
-        value="In 15 minutes"
-        <%= lail.status === "In 15 minutes" ? "selected" : "" %>
-      >
-        In 45 minutes
-      </option>
-      <option
-        value="In 45 minutes"
-        <%= lail.status === "in 45 minutes" ? "selected" : "" %>
-      >
-        Abord
-      </option>
-      <option
-        value="abord"
-        <%= lail.status === "abord" ? "selected" : "" %>
-      >
-       Hold
-      </option>
-    </select>
-    <button type="submit">Update Lails</button>
+  <label for="image">Image:</label>
+  <input type="text" name="image" id="image" value = "<%= lail.image %>" />
+
+  <label for="music">Add Music:</label>
+  <input type="text" name="addmusic" id="music" value = "<%= lail.addmusic %>"/>
+
+  <button type="submit">Update Lail</button>
   </form>
 </body>
 </html>
