@@ -8,27 +8,28 @@ const User = require("../models/user");
 
 
 
-router.get("/", async function (req, res) {
-  console.log(req.session, " req.session in index of lails");
-  try {
-    const currentUser = await UserModel.findById(req.session.user._id);
-console.log(currentUser)
-    res.render("lails/index.ejs", {
-      lails: currentUser.lails,
-    });
+router.get("/users/:userId/lails/", async function (req, res) {
+	console.log(req.session, " req.session in index of lails");
+	try {
+	  const currentUser = await UserModel.findById(req.params.userId);
+  console.log(currentUser)
+	  res.render("lails/profile.ejs", {
+		lails: currentUser.lails,
+		owner: currentUser
+	  });
+  
+	} catch (err) {
+	  console.log(err);
+	  res.send("Error Rendering all lails check terminal");
+	}
+  });
 
-  } catch (err) {
-    console.log(err);
-    res.send("Error Rendering all lails check terminal");
-  }
-});
-
-router.get("/new", function (req, res) {
+router.get("/users/:userId/lails/new", function (req, res) {
   res.render("lails/new.ejs");
 });
 
 // friday 1/24 FOURTH
-router.put('/:lailId', async function(req, res){
+router.put('/users/:userId/lails/:lailId', async function(req, res){
 	try {
 		// find the logged in the user
 		const currentUser = await UserModel.findById(req.session.user._id)
@@ -51,7 +52,7 @@ router.put('/:lailId', async function(req, res){
 // friday 1/24 FOURTH
 
 // friday 1/24 THIRD
-router.get('/:lailId/edit', async function(req, res){
+router.get('/users/:userId/lails/:lailId/edit', async function(req, res){
 	try {
 			// Look up the user, then grab the application that matches the id in params
 		// from the user's applications array
@@ -72,7 +73,7 @@ router.get('/:lailId/edit', async function(req, res){
 // friday 1/24 THIRD
 
 // friday 1/24 SECOND
-router.delete('/:lailId', async function(req, res){
+router.delete('/users/:userId/lails/:lailId', async function(req, res){
 	try {
 		// look up the user, because the user has the lails array
 		// Google (Mongoose Model Methods)
@@ -97,26 +98,10 @@ router.delete('/:lailId', async function(req, res){
 
 // friday 1/24 FIRST
 // show route after the new! So express matches the new
-router.get('/:lailId', async function(req, res){
-	// THe job of this function is to render a specific lail
-	try {
-		// Look up the user, then grab the lail that matches the id in params
-		// from the user's lails array
-		const currentUser = await UserModel.findById(req.session.user._id) .populate({path:'lails', populate: {path: 'comments'}})
-		// find the lail ("The google" Mongoose document methods)
-		const lail = currentUser.lails.id(req.params.lailId)
-		// respond to the client with the ejs page
-		res.render('lails/show.ejs', {
-			lail: lail
-		})
 
-	} catch(err){
-		console.log(err)
-		res.send("error and show page check your terminal!")
-	}
-}) // friday 1/24 FIRST
 
-router.post("/", async function (req, res) {
+router.post("/users/:userId/lails/", async function (req, res) {
+	req.body.user= req.session.user._id
   try {
     // look up the user
     const currentUser = await UserModel.findById(req.session.user._id);
@@ -134,10 +119,10 @@ router.post("/", async function (req, res) {
   }
 });
 
-router.put('/:lailId/likes', async function(req, res){
+router.put('/users/:userId/lails/:lailId/likes', async function(req, res){
 	try {
 		
-		const currentUser = await UserModel.findById(req.session.user._id)
+		const currentUser = await UserModel.findById(req.params.userId)
 		
 		const lail = currentUser.lails.id(req.params.lailId)
 		
@@ -159,6 +144,58 @@ router.put('/:lailId/likes', async function(req, res){
 		res.send("error updating lail, check terminal")
 	}
 })
+router.get("/lails", async function (req, res) {
+  console.log(req.session, " req.session in index of lails");
+  try {
+	const currentUsers = await UserModel.find().populate({
+		path: 'lails',
+		populate: {
+		  path: 'user',
+		  model: 'User'
+		}
+	  }) 
+	let allLails = []
+	for(user of currentUsers) {
+		user.lails.forEach(lail => {
+		  
+			allLails.push(lail)
+			
+			
+		});
+	}
+	console.log(allLails)
+	res.render("lails/index.ejs", {
+	  lails: allLails
+	});
+
+  } catch (err) {
+	console.log(err);
+	res.send("Error Rendering all lails check terminal");
+  }
+});
+router.get('/users/:userId/lails/:lailId', async function(req, res){
+  console.log("userId", req.params.userId)
+  console.log("lailId", req.params.lailId)
+	// THe job of this function is to render a specific lail
+	try {
+		// Look up the user, then grab the lail that matches the id in params
+		// from the user's lails array
+		const currentUser = await UserModel.findById(req.params.userId).populate({path:'lails', populate: {path: 'comments'}})
+		// find the lail ("The google" Mongoose document methods)
+		const lail = currentUser.lails.id(req.params.lailId)
+	console.log(lail)
+		// respond to the client with the ejs page
+		res.render('lails/show.ejs', {
+			lail: lail, 
+			// owner: currentUser.id
+			
+		})
+
+	} catch(err){
+		console.log(err)
+		res.send("error and show page check your terminal!")
+	}
+}) // friday 1/24 FI
 
 // we need to mount the router in our server.js in order to use it!
 module.exports = router;

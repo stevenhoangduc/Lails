@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>Lails</title>
+    <!-- <link rel="stylesheet" href="/stylesheets/profile.css" /> -->
+    <link rel="stylesheet" href="/stylesheets/index.css" />
 </head>
 <body>
-    
+    <%- include('../partials/_navbar.ejs') %>
+		<h1> <%= owner.username %>'s Lails </h1>
+		
+		<ul>
+			<% if (lails.length) { %>
+				<% lails.forEach(lail => { %>
+				  <li>
+					<a href="/users/<%= lail.user._id %>/lails/<%= lail._id %>">
+						<img src="<%= lail.image %>" width="300px" alt="">
+						<h1><%= lail.addText %></h1>
+						
+					</a>
+				  </li>
+				<% }); %>
+				  <% } else { %>
+				   no lails yet
+			<% } %>
+		  </ul>
 </body>
 </html>

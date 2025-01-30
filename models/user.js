@@ -7,16 +7,19 @@ const lailsSchema = mongoose.Schema({
     type: String, 
     required: true
   },
-  addmusic: {
+  addText: {
     type: String,
-    required: true
+    
   }, 
   comments: [{
     type: mongoose.Schema.Types.ObjectId, 
     ref: "Comment"
   }],
   likes: Number,
- 
+  user: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "User"
+  }
 })
 
 const userSchema = mongoose.Schema({

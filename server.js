@@ -24,7 +24,13 @@ const commentCtrl = require("./controllers/comments.js");// added tuesday
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 
+// added this for the css to work, (wasnt working before) TOGETHER
+
 const port = process.env.PORT ? process.env.PORT : '3000';
+
+// new code below this line ---
+const path = require('path');
+// added thie above for the css to work, (wasnt working before) TOGETHER
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -38,15 +44,19 @@ mongoose.connection.on('connected', () => {
 app.use(express.static('public'));
 
 // MIDDLEWARE ================================
-// parses the form submissions to create req.body
-app.use(express.urlencoded({ extended: false }));
+
+// added this for css to load (didn't load befor this) TOGETHER
+app.use(express.urlencoded({ extended: false }));//The express.static middleware is designed to serve static files like CSS stylesheets.
 
 app.use(methodOverride('_method'));
 
-// log out http requests into the server
-app.use(morgan("dev"));
-// creates/process our session cookies
-// app.use(morgan('dev'));
+
+// app.use(morgan("dev"));
+
+// new code below this line ---
+app.use(express.static(path.join(__dirname, 'public')));
+// new ode above this line ---
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -54,6 +64,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+// added the above for css to load (didn't load befor this) TOGETHER
 
 // USING THE CUSTOM MIDDLEWARE FUNCTION
 // this must exist before our endpoints (because it is attaching) the user
@@ -67,7 +78,7 @@ app.get("/", (req, res) => {
 
   // if we are logged in lets redirect the user to their lails index page
   if (req.session.user) {
-    res.redirect(`/users/${req.session.user._id}/lails`);
+    res.redirect(`/lails`);session
   } else {
     // otherwise show the landing page
     res.render("index.ejs");
@@ -81,7 +92,7 @@ app.use("/auth", authController);
 
 // Check for log before our lail endpoints
 app.use(isSignedIn)
-app.use("/users/:userId/lails", lailCtrl);
+app.use("/", lailCtrl);
 app.use("/", commentCtrl);
 
 
@@ -91,6 +102,17 @@ app.get('/', (req, res) => {
   });
 });
 
+
+
+
+
+
+
+
+
+
+
+
 app.get('/vip-lounge', (req, res) => {
   if (req.session.user) {
     res.send(`Welcome to the party ${req.session.user.username}.`);
@@ -98,6 +120,8 @@ app.get('/vip-lounge', (req, res) => {
     res.send('Sorry, no guests allowed.');
   }
 });
+
+
 
 
 app.listen(port, () => {

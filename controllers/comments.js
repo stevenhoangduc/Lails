@@ -12,6 +12,7 @@ router.post ('/users/:userId/lails/:lailId/comments', async function (req, res){
         const newComment = await Comment.create(req.body)
         newComment.user = (req.session.user._id)
         await newComment.save ()
+        console.log(lail)
         lail.comments.push(newComment)
         await owner.save()
         res.redirect(`/users/${owner._id}/lails/${lail._id}`)

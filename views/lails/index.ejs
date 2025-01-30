@@ -5,21 +5,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Lails</title>
-	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="/stylesheets/index.css" />
 </head>
 
 <body>
 	<%- include('../partials/_navbar.ejs') %>
-		<h1>Lails</h1>
+		<h1>All lails</h1>
 		<a href="/users/<%= user._id %>/lails/new">Create a new Post </a>
 		<ul>
-			<% lails.forEach(lail => { %>
-			  <li>
-				<a href="/users/<%= user._id %>/lails/<%= lail._id %>">
-				  <%= lail.image %> at <%= lail.addmusic %>
-				</a>
-			  </li>
-			<% }); %>
+			<% if (lails.length) { %>
+				<% lails.forEach(lail => { %>
+				  <li>
+					<a href="/users/<%= lail.user._id %>/lails/<%= lail._id %>">
+						<img src="<%= lail.image %>" width="300px" alt="">
+						<h1><%= lail.addText %></h1>
+						<a href="/users/<%= lail.user._id %>/lails"><h3><%= lail.user.username %></h3></a>
+						
+					</a>
+				  </li>
+				<% }); %>
+				  <% } else { %>
+				   no lails yet
+			<% } %>
 		  </ul>
 		  
 </body>

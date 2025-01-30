@@ -1,6 +1,10 @@
-<!-- updated all application to lail 1/28 -->
+<!-- views/partials/_navbar.ejs -->
+
+<link rel="stylesheet" href="/stylesheets/partials.css" />
+
 <nav>
 	<% if (user) { %>
+		<a href="/lails">All Lails</a>
 		<a href="/users/<%= user._id %>/lails">Your Lails</a>
 		<a href="/auth/sign-out">Sign Out</a>
 	<% } else {%>

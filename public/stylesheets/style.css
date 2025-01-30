@@ -1,11 +1,18 @@
-/* General Styles */
+/* public/stylesheets/style.css */
+
+
+
+/* public/stylesheets/style.css */
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f3f4f6, #e2e8f0);
-    color: #333;
-    text-align: center;
-  }
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #9ac2ef;
+}
+
   
   .container {
     display: flex;

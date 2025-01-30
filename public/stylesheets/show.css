@@ -1,0 +1,150 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(180deg, #b3e5fc, #e1f5fe);
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  flex-direction: column;
+}
+.like {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+/* Wavy Background */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.3), transparent 50%),
+              radial-gradient(circle at bottom, #cde7ff, transparent 70%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* Main Content Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+/* Logo Header */
+.logo {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #001f4d;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* Call-to-Action Section */
+.cta h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #001f4d;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.cta .sub-text {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Buttons (Stacked Layout) */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #007bff, #247bd8);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2881e0, #1963ca);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background: linear-gradient(90deg, #6c757d, #495057);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(90deg, #5a6268, #343a40);
+  transform: scale(1.05);
+}
+
+/* VIP Lounge Link */
+.vip-link {
+  margin-top: 30px;
+}
+
+.vip-btn {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #001f4d;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.vip-btn:hover {
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .logo {
+    font-size: 3rem;
+  }
+
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
