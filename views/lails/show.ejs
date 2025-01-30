@@ -13,8 +13,11 @@
 	<%- include('../partials/_navbar') %>
   <div>
   <img src="<%= lail.image %>" width="300px" alt="">
+  <!-- Post Text -->
   <h1><%= lail.addText %></h1>
 
+
+<!-- Likes Section -->
 	<div class="like">
 	<% if (lail.likes) { %>
 		<p>Likes: <%= lail.likes %></p> 

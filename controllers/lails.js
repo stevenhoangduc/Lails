@@ -8,6 +8,8 @@ const User = require("../models/user");
 
 
 
+
+
 router.get("/users/:userId/lails/", async function (req, res) {
 	console.log(req.session, " req.session in index of lails");
 	try {
