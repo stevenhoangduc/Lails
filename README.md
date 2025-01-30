@@ -40,9 +40,9 @@ Lails allows users to share posts with images and music, interact with others th
 
 ## 🛠 Usage
 1. **Sign up or log in** to start using Lails.
-2. Create a new post with an image and optional music.
-3. Like & comment on other users' posts.
-4. Edit or delete your posts as needed.
+2. **Create a new post** with an image and optional music.
+3. **Like & comment** on other users' posts.
+4. **Edit or delete** your posts as needed.
 
 ---
 
