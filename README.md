@@ -4,6 +4,11 @@ Lails allows users to share posts with images and music, interact with others th
 
 ---
 
+https://github.com/stevenhoangduc/Lails/blob/31a8c94aa0598915a57c9325e38b09eb43ed83a5/04907881-99EA-447B-A579-554B40659634_1_201_a.jpeg
+
+---
+
+
 ## 📌 Features
 - 🌍 **Create & Share**: Upload posts with images and music.
 - 💬 **Engage with Others**: Like and comment on posts.
