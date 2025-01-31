@@ -6,28 +6,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Lails</title>
 	<link rel="stylesheet" href="/stylesheets/index.css" />
+	<link rel="stylesheet" href="/stylesheets/navbar.css" />
+	<link rel="stylesheet" href="/stylesheets/footer.css" />
 </head>
 
+<%- include('../partials/_navbar.ejs') %>
 <body>
-	<%- include('../partials/_navbar.ejs') %>
 		<h1>All lails</h1>
 		<a href="/users/<%= user._id %>/lails/new">Create a new Post </a>
 		<ul>
 			<% if (lails.length) { %>
 				<% lails.forEach(lail => { %>
-				  <li>
+				  <div class="post">
 					<a href="/users/<%= lail.user._id %>/lails/<%= lail._id %>">
 						<img src="<%= lail.image %>" width="300px" alt="">
 						<h1><%= lail.addText %></h1>
-						<a href="/users/<%= lail.user._id %>/lails"><h3><%= lail.user.username %></h3></a>
 						
 					</a>
-				  </li>
+					<div>
+						<span>
+						<a href="/users/<%= lail.user._id %>/lails"> <strong><%= lail.user.username %></a> </strong>posted on <%= lail.createdAt %></div>
+					</span>
+				  </div>
 				<% }); %>
 				  <% } else { %>
 				   no lails yet
 			<% } %>
 		  </ul>
+		    <!-- Ensure footer is included -->
+  <%- include('../partials/_footer') %>
 		  
 </body>
 

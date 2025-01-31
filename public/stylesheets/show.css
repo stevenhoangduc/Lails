@@ -1,7 +1,7 @@
 /* General Reset */
 body {
   margin: 0;
-  padding: 0;
+  padding: 75px 0;
   font-family: 'Arial', sans-serif;
   background: linear-gradient(180deg, #b3e5fc, #e1f5fe);
   min-height: 100vh;
@@ -9,16 +9,47 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  overflow: hidden;
   text-align: center;
   flex-direction: column;
+  
+}
+button {
+ 
+  /* display: block; */
+  background-color: #007bff;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-weight: 900;
+
 }
 .like {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
+}
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 15px;
+
+}
+.post {
+  background: white;
+  padding: 20px;
+  border: 1px solid dodgerblue;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  
 }
 
 /* Wavy Background */

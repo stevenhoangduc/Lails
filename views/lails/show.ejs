@@ -7,42 +7,59 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
   <link rel="stylesheet" href="/stylesheets/show.css" />
+  <link rel="stylesheet" href="/stylesheets/navbar.css" />
+  <link rel="stylesheet" href="/stylesheets/partials.css" />
+  <link rel="stylesheet" href="/stylesheets/footer.css" />
+
 </head>
 
 <body>
+
+  
+  <!-- Navbar at the Top -->
 	<%- include('../partials/_navbar') %>
-  <div>
+
+  <div class="post">
   <img src="<%= lail.image %>" width="300px" alt="">
   <!-- Post Text -->
   <h1><%= lail.addText %></h1>
+  </div>
+
+  
 
 
 <!-- Likes Section -->
 	<div class="like">
 	<% if (lail.likes) { %>
-		<p>Likes: <%= lail.likes %></p> 
+		<p>Likes: <%= lail.likes %> </p> 
 	<% } else {%>
-      <p>Likes: 0</p>
+      <p>Likes: 0 </p>
   <%} %>
-  
+ 
   <form
   action="/users/<%= lail.user._id %>/lails/<%= lail._id %>/likes?_method=PUT"
   method="POST"
 >
+
   <button type="submit">like this post</button>
 </form>
 </div>
 </div>
+<div class="comment-form">
 <form action="/users/<%= lail.user._id %>/lails/<%= lail._id %>/comments" method="POST">
 
   comment: <input type="text" name="text"/>
   <button type="submit">add comment</button>
 </form>
-
+</div>
 	<% if (lail.comments.length) { %>
     <!-- for each loops on lails.comments -->
     <% lail.comments.forEach(comment => { %>
+      <div>
       <p><%= comment.text %></p>
+      <span>
+        <a href="/users/<%= comment.user._id %>/lails"> <strong><%= comment.user.username %></a> </strong>posted on <%= lail.createdAt %></div>
+      </span>
       <% if (comment.user._id == user._id) { %>
         <form
         action="/users/<%= lail.user._id %>/lails/<%= lail._id %>/comments/<%= comment._id %>?_method=DELETE"
@@ -50,7 +67,7 @@
       >
         <button type="submit">Delete comment</button>
       </form> 
-       
+    </div>
       <% } %>
      
     <% }) %>
@@ -69,7 +86,8 @@
       </form> 
       <% } %>
 	
-  
+    <!-- Ensure footer is included -->
+    <%- include('../partials/_footer') %>
 
 </body>
 </html> 

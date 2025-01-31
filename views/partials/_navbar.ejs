@@ -1,8 +1,11 @@
 <!-- views/partials/_navbar.ejs -->
 
-<link rel="stylesheet" href="/stylesheets/partials.css" />
+<!-- <link rel="stylesheet" href="/stylesheets/partials.css" />
+<link rel="stylesheet" href="/stylesheets/navbar.css" /> -->
 
-<nav>
+
+<!-- Navbar at the Top -->
+<nav class="navbar">
 	<% if (user) { %>
 		<a href="/lails">All Lails</a>
 		<a href="/users/<%= user._id %>/lails">Your Lails</a>
@@ -11,4 +14,8 @@
 		<a href="/auth/sign-in">Sign In</a>
 		<a href="/auth/sign-out">Sign Out</a>
 	<% } %>
+	<a id="top"></a>
 </nav>
+
+ 
+

@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lails</title>
     <!-- <link rel="stylesheet" href="/stylesheets/profile.css" /> -->
-    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link rel="stylesheet" href="/stylesheets/profile.css" />
+	<link rel="stylesheet" href="/stylesheets/navbar.css" />
+	<link rel="stylesheet" href="/stylesheets/footer.css" />
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
+	<div class="profile"> 
 		<h1> <%= owner.username %>'s Lails </h1>
 		
-		<ul>
-			<% if (lails.length) { %>
-				<% lails.forEach(lail => { %>
-				  <li>
+		<% if (lails.length) { %>
+			<% lails.forEach(lail => { %>
+				<div class="post">
+				  
 					<a href="/users/<%= lail.user._id %>/lails/<%= lail._id %>">
 						<img src="<%= lail.image %>" width="300px" alt="">
 						<h1><%= lail.addText %></h1>
 						
 					</a>
-				  </li>
+				  
+				</div>
 				<% }); %>
 				  <% } else { %>
 				   no lails yet
 			<% } %>
-		  </ul>
+		</div>
+			  <!-- Ensure footer is included -->
+  <%- include('../partials/_footer') %>
 </body>
 </html>

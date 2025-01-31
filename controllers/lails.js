@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 const UserModel = require("../models/user");
-const User = require("../models/user");
+const Comment = require("../models/comment");
 
 
 
@@ -182,9 +182,10 @@ router.get('/users/:userId/lails/:lailId', async function(req, res){
 	try {
 		// Look up the user, then grab the lail that matches the id in params
 		// from the user's lails array
-		const currentUser = await UserModel.findById(req.params.userId).populate({path:'lails', populate: {path: 'comments'}})
+		const currentUser = await UserModel.findById(req.params.userId).populate({path:'lails', populate: {path: 'comments', populate: {path: 'user', model: 'User'}}})
 		// find the lail ("The google" Mongoose document methods)
 		const lail = currentUser.lails.id(req.params.lailId)
+		console.log(lail)
 	console.log(lail)
 		// respond to the client with the ejs page
 		res.render('lails/show.ejs', {
